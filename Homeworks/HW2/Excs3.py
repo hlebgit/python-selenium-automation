@@ -12,22 +12,16 @@ service = Service(driver_path)
 driver = webdriver.Chrome(service=service)
 driver.maximize_window()
 
-# open the url
-driver.get('https://www.google.com/')
+# Exercise 3
+driver.get("https://www.amazon.com")
 
-# populate search field
-search = driver.find_element(By.NAME, 'q')
-search.clear()
-search.send_keys('Table')
+driver.find_element(By.ID, "nav-orders").click()
 
-# wait for 4 sec
-sleep(4)
+expected_result = "Sign in"
+actual_result = driver.find_element(By.XPATH, "//h1[@class='a-spacing-small']").text
+driver.find_element(By.ID, "ap_email")
 
-# click search button
-driver.find_element(By.NAME, 'btnK').click()
-
-# verify search results
-assert 'table' in driver.current_url.lower(), f"Expected query not in {driver.current_url.lower()}"
-print('Test Passed')
+assert expected_result == actual_result, "Error: expected text did not match actual"
+print("Test case passed!")
 
 driver.quit()
