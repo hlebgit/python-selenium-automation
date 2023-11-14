@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from behave import given, when, then
 from time import sleep
 
-@given('Open Target page')
+@given('Open HW4. Target page')
 def open_target(context):
     context.driver.get('https://www.target.com')
 
@@ -36,6 +36,6 @@ def click_sign_in_in_nav_manu(context):
 
 @then('Verify sign in page opened')
 def check_page(context):
-    expected_result = 'Sign into your Target account'
-    actual_result = context.driver.find_element(By.XPATH, "//span[text()='Sign into your Target account']").text
+    expected_result = 'Sign into your HW4. Target account'
+    actual_result = context.driver.find_element(By.XPATH, "//span[text()='Sign into your HW4. Target account']").text
     assert expected_result == actual_result, "Error! Results are not equal!"
