@@ -1,17 +1,21 @@
-from selenium.webdriver.common.by import By
 from behave import given, when, then
-from time import sleep
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 @given("Open product page")
 def open_product_page(context):
-    context.driver.get("https://www.target.com/p/7-5-39-pre-lit-virginia-pine-artificial-christmas-tree-dual-color-lights-wondershop-8482/-/A-87305103#lnk=sametab")
+    context.driver.get(
+        "https://www.target.com/p/costway-prelit-7-5ft-christmas-tree-flocked-xmas-snowy-tree-450-led-lights/-/A-87791923#lnk=sametab")
 
 @when("Add product to the cart")
 def add_product(context):
-    sleep(5)
+    context.driver.wait = WebDriverWait(context.driver, 15)
+    context.driver.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "[data-test*='AddToCart'] [id*='addToCart']")))
+    print("ALL GOOD: ")
     global expected_result
     expected_result = context.driver.find_element(By.XPATH, "//h1[@id='pdp-product-title-id']").text
-    context.driver.find_element(By.CSS_SELECTOR, "div[data-test*='order'] [id*='addToCartButton']").click()
+    context.driver.find_element(By.CSS_SELECTOR, "[class*='AddToCartWrapper'] [id*='addToCart']").click()
 
 @when("Check Out")
 def checkout_cart(context):

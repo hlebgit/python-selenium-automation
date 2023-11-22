@@ -12,6 +12,8 @@ def browser_init(context):
     context.driver = webdriver.Chrome(service=service)
 
     context.driver.maximize_window()
+
+    context.driver.maximize_window()
     context.driver.implicitly_wait(4)
 
 
