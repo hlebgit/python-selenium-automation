@@ -1,7 +1,5 @@
 from behave import given, when, then
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 
 @given("Open product page")
 def open_product_page(context):
