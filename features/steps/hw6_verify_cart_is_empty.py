@@ -1,9 +1,5 @@
 from behave import given, when, then
 
-@given("Open target page")
-def open_target_page(context):
-    context.app.verify_cart_is_empty.open_target()
-
 
 @when("Click on cart icon")
 def search_product(context):
