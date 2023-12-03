@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class Page:
@@ -26,3 +27,20 @@ class Page:
         actual_text = self.find_element(*locator).text
         assert expected_text in actual_text,\
             f"Expected text {expected_text} did not match actual {actual_text}"
+
+    def get_current_window(self):
+        return self.driver.current_window_handle
+
+    def get_all_windows(self):
+        return self.driver.window_handles
+
+    def switch_to_new_window(self):
+        self.wait.until(EC.new_window_is_opened)
+        new_window = self.driver.window_handles[1]
+        self.driver.switch_to.window(new_window)
+
+    def close_page(self):
+        self.driver.close()
+
+    def switch_to_window(self, window_id):
+        self.driver.switch_to.window(window_id)
