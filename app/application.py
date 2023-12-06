@@ -8,6 +8,7 @@ from pages.main_page import MainPage
 from pages.sign_in_page import SignInPage
 from pages.cart_page import CartPage
 from pages.search_results_page import SearchResults
+from pages.target_help_page import TargetHelpPage
 
 class Application:
 
@@ -22,5 +23,6 @@ class Application:
         self.sign_in_page = SignInPage(driver)
         self.cart_page = CartPage(driver)
         self.search_results_page = SearchResults(driver)
+        self.target_help_page = TargetHelpPage(driver)
 
 

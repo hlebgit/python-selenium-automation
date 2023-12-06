@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from time import sleep
 
 
 class Page:
@@ -24,9 +25,9 @@ class Page:
         self.driver.find_element(*locator).send_keys(text)
 
     def verify_text(self, expected_text, *locator):
-        actual_text = self.find_element(*locator).text
+        actual_text = self.driver.find_element(*locator).text
         assert expected_text in actual_text,\
-            f"Expected text {expected_text} did not match actual {actual_text}"
+            f"Expected text '{expected_text}' did not match actual '{actual_text}'"
 
     def get_current_window(self):
         return self.driver.current_window_handle
@@ -44,3 +45,10 @@ class Page:
 
     def switch_to_window(self, window_id):
         self.driver.switch_to.window(window_id)
+
+    def wait_for_element_visible(self, *locator):
+        element = self.wait.until(
+            EC.visibility_of_element_located(*locator),
+            message=f'Element by {locator} not visible'
+        )
+        return element

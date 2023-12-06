@@ -13,3 +13,10 @@ Feature: Verify Sign in Page opened
     And Switch to the newly opened window
     Then Verify Terms and Conditions page is opened
     And User can close new window and switch back to original
+
+
+  Scenario: After entering incorrect login error shows
+    Given Open sign in page
+    When Enter incorrect email and password combination
+    And Click login button
+    Then Verify 'We can't find your account.' message is shown

@@ -1,5 +1,11 @@
 from selenium.webdriver.common.by import By
 from behave import given, when, then
+from time import sleep
+
+EMAIL_FIELD = (By.CSS_SELECTOR, "[id='username']")
+PSWD_FIELD = (By.CSS_SELECTOR, "[id='password']")
+SIGN_IN_BTN = (By.CSS_SELECTOR, "[id='login']")
+ERROR_MSG = (By.CSS_SELECTOR, "[data-test*='AlertDisplay'] div")
 
 @given('Open sign in page')
 def open_sign_in_page(context):
@@ -32,9 +38,24 @@ def close_new_window(context):
     context.app.page.switch_to_window(context.original_window)
 
 
-
-
 @then('Verify Sign in page opened')
 def verify_sign_in_page(context):
     context.app.sign_in_page.verify_sign_in_page_txt()
 
+
+@when('Enter incorrect email and password combination')
+def enter_incorrect_login(context):
+    context.app.page.input('instantdriver135@gmail.com', *EMAIL_FIELD)
+    context.app.page.input('idriver135', *PSWD_FIELD)
+    sleep(3)
+
+
+@when('Click login button')
+def login(context):
+    context.app.page.click(*SIGN_IN_BTN)
+    sleep(3)
+
+
+@then("Verify '{text}' message is shown")
+def verify_message(context, text):
+    context.app.page.verify_text(text, *ERROR_MSG)
