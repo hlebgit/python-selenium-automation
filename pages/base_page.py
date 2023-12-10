@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from time import sleep
+from support.logger import logger
 
 
 class Page:
@@ -10,13 +10,16 @@ class Page:
         self.wait = WebDriverWait(driver, 15)
 
     def open_url(self, url):
-         self.driver.get(url)
+        self.driver.get(url)
+        logger.info(f'Opening url {url}')
 
     def click(self, *locator):
-         self.driver.find_element(*locator).click()
+        self.driver.find_element(*locator).click()
+        logger.info(f'Clicking on {locator}')
 
     def find_element(self, *locator):
-         return self.driver.find_element(*locator)
+        logger.info(f'Searching for {locator}')
+        return self.driver.find_element(*locator)
 
     def find_elements(self, *locator):
          return self.driver.find_elements(*locator)
@@ -52,3 +55,4 @@ class Page:
             message=f'Element by {locator} not visible'
         )
         return element
+

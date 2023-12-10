@@ -1,6 +1,10 @@
 from behave import given, when, then
 
 
+@given('Open Target page')
+def open_target(context):
+    context.app.main_page.open_main()
+
 @when('Click sign in')
 def click_sign_in(context):
     context.app.main_page.sign_in()
